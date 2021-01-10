@@ -1,0 +1,42 @@
+<form [formGroup]="form" (submit)="onSubmit()">
+    <div *ngFor="let element of formConfig">
+      <div [ngSwitch]="element.inputType">
+        <label [for]="element.id">{{ element.name }}</label
+        ><span *ngIf="element?.required">*</span>
+        <br />
+        <div *ngSwitchCase="'input'">
+          <div *ngIf="element.type === 'radio'; else notRadio">
+            <div *ngFor="let option of element.options">
+              <input
+                [type]="element.type"
+                [name]="element.name"
+                [id]="option.id"
+                [formControlName]="element.name"
+                [value]="option.value"
+              />
+              <label [for]="option.id">{{ option.label }}</label
+              ><span *ngIf="element?.required">*</span>
+            </div>
+          </div>
+          <ng-template #notRadio>
+            <input
+              [type]="element.type"
+              [id]="element.name"
+              [formControlName]="element.name"
+            />
+          </ng-template>
+        </div>
+        <select
+          [name]="element.name"
+          [id]="element.id"
+          *ngSwitchCase="'select'"
+          [formControlName]="element.name"
+        >
+          <option [value]="option.value" *ngFor="let option of element.options">{{
+            option.label
+          }}</option>
+        </select>
+      </div>
+    </div>
+    <button>Submit</button>
+  </form>

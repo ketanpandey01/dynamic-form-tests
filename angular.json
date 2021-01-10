@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "dynamic-form-tests"
+    }
+  },
+  "defaultProject": "dynamic-form-tests",
+  "cli": {
+    "analytics": false
+  }
 }
